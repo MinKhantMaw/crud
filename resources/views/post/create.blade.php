@@ -9,14 +9,29 @@
         </div>
         <form action="/posts" method="post">
             @csrf
+            {{-- @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif --}}
             <div class="card-body">
                 <div class="form-group">
                     <label for="">Title</label>
-                    <input type="text" name="name" class="form-control" placeholder="Enter Post Title">
+                    <input type="text" value="{{old('name')}}" name="name" class="form-control" placeholder="Enter Post Title">
+                    @error('name')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="">Description</label>
-                    <textarea name="description" class="form-control" placeholder="Enter Description"></textarea>
+                    <textarea name="description" class="form-control" placeholder="Enter Description">{{old('description')}}</textarea>
+                     @error('description')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Create</button>
             </div>

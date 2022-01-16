@@ -9,10 +9,10 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Title</h5>
-            <span>{{ $data->name }}</span>
+            <span>{{ $post->name }}</span>
             <hr>
             <h4 class="card-text">Description </h4>
-            <span>{{ $data->description }}</span>
+            <span>{{ $post->description }}</span>
         </div>
 
     </div>

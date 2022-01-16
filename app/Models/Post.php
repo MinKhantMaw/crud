@@ -13,4 +13,8 @@ class Post extends Model
         'name',
         'description',
     ];
+     public function categories()
+    {
+        return $this->hasMany('App\Models\Category','category_id');
+    }
 }

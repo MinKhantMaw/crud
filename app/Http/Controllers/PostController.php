@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\storePostRequests;
 
 class PostController extends Controller
 {
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::get();
+        $data = Post::orderBy('id', 'desc')->get();
         return view('post.home', compact('data'));
     }
 
@@ -34,8 +35,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storePostRequests $request)
     {
+        // $request->validate([
+        //     'name' => 'required|max:100',
+        //     'description' => 'required|max:255',
+        // ]);
+
         $post = new Post();
         $post->name = $request->name;
         $post->description = $request->description;
@@ -49,10 +55,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $data = Post::findOrFail($id);
-        return view('post.detail', compact('data'));
+        // $data = Post::findOrFail($id);
+        return view('post.detail', compact('post'));
     }
 
     /**
@@ -61,10 +67,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $data = Post::findOrFail($id);
-        return view('post.edit', compact('data'));
+
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -74,9 +80,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(storePostRequests $request, Post $post)
     {
-        $post=Post::findOrFail($id);
+        // $request->validate([
+        //     'name' => 'required|max:100',
+        //     'description' => 'required|max:255',
+        // ]);
+
         $post->name = $request->name;
         $post->description = $request->description;
         $post->save();
