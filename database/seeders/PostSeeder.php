@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class PostSeeder extends Seeder
 {
@@ -17,14 +16,14 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-       for ($i=0; $i <5 ; $i++) {
-DB::table('posts')->insert([
-    'name' => Str::random(10),
-    'description' => Str::random(100),
-    'created_at' => Carbon::now(),
-    'updated_at' => Carbon::now(),
-]);
+        for ($i = 0; $i < 5; $i++) {
+            DB::table('posts')->insert([
+                'name' => Str::random(10),
+                'description' => Str::random(50),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
 
-       }
+        }
     }
 }
